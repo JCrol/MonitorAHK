@@ -5,7 +5,7 @@ using System.Data.SqlClient;
 
 namespace Utilidades
 {
-    public static class Data
+    public static class Sql
     {
         public static DataSet Ejecutar(string sqlString)
         {
