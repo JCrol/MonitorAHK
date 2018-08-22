@@ -7,9 +7,13 @@ namespace Monitor
 {
     public partial class Form1 : Form
     {
+        private string connectionString;
+
         public Form1()
         {
             InitializeComponent();
+            connectionString = "Data Source=DBEFIDIA; Initial Catalog=nice_storage_center; " +
+                "Persist Security Info=True; User ID=nicevb; Password=N1c3ct134";
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -79,8 +83,11 @@ namespace Monitor
 
             try
             {
-                dataSet = Sql.ObtenerDataSet("DECLARE @FechaLocal DATETIME DECLARE @FechaGTM DATETIME DECLARE @FechaInicio DATETIME SET @FechaLocal = (SELECT GETDATE()) SET @FechaGTM = (SELECT DATEADD(hour, 6, @FechaLocal)) SET @FechaInicio = (SELECT CONVERT(char(10), @FechaGTM, 112)) SELECT iLoggerID AS 'LOGGER', SUM(ISNULL(CAST(iCount AS BIGINT), 0)) AS 'PENDIENTES POR ARCHIVAR' FROM nice_storage_center.dbo.vwScBacklog WHERE dtRecordingGMTStartTime BETWEEN @FechaInicio AND @FechaGTM GROUP BY iLoggerID",
-                    "Data Source=DBEFIDIA; Initial Catalog=nice_storage_center; Persist Security Info=True; User ID=nicevb; Password=N1c3ct134");
+                dataSet = Sql.ObtenerDataSet("SELECT iLoggerID AS [Grabador], SUM(ISNULL(CAST(iCount AS " +
+                    "BIGINT), 0)) AS [Grabaciones restantes] FROM nice_storage_center.dbo.vwScBacklog " +
+                    "WHERE dtRecordingGMTStartTime BETWEEN CONVERT(DATE, GETUTCDATE()) AND GETUTCDATE() " +
+                    "GROUP BY iLoggerID ORDER BY iLoggerID",
+                    connectionString);
 
                 if (dataSet.Tables.Count > 0)
                     dataGridBacklog.DataSource = dataSet.Tables[0];
