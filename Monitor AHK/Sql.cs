@@ -1,40 +1,34 @@
-﻿using System;
-using System.Data;
+﻿using System.Data;
 using System.Data.SqlClient;
-using System.Windows.Forms;
 
 namespace Utilidades
 {
     public static class Sql
     {
-        public static DataSet Ejecutar(string sqlString)
+        public static DataSet ObtenerDataSet(string sqlQuery, string connectionString)
         {
+            SqlConnection sqlConnection = new SqlConnection(connectionString);
+
             try
             {
-                SqlConnection sqlConn = new SqlConnection("Data Source=DBEFIDIA;Initial Catalog=nice_storage_center;Persist Security Info=True;User ID=nicevb;Password=N1c3ct134");
-                sqlConn.Open();
+                sqlConnection.Open();
 
                 DataSet dataSet = new DataSet();
-                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlString, sqlConn);
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlQuery, sqlConnection);
 
                 sqlDataAdapter.Fill(dataSet);
-
-                sqlConn.Close();
+                sqlConnection.Close();
 
                 return dataSet;
             }
-            catch (SqlException e)
+            catch (SqlException)
             {
-                MessageBox.Show("Ha ocurrido un error relacionado con la base de datos o la instancia SQL." + Environment.NewLine +
-                    e.Message, "Monitor AHK", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (sqlConnection.State == ConnectionState.Open ||
+                    sqlConnection.State == ConnectionState.Broken)
+                    sqlConnection.Close();
+                throw;
             }
-            catch (Exception e)
-            {
-                MessageBox.Show("Ha ocurrido un error desconocido." + Environment.NewLine +
-                    e.Message, "Monitor AHK", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-            return new DataSet();
+            catch { throw; }
         }
     }
 }
