@@ -3,7 +3,7 @@ using System;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 
-namespace MiLibreria
+namespace Utilidades
 {
     public static class Utilidades
     {
