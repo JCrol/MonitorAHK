@@ -1,7 +1,7 @@
-﻿using Utilidades;
-using System;
+﻿using System;
 using System.Data;
 using System.Windows.Forms;
+using Utilidades;
 
 namespace Monitor
 {
@@ -75,7 +75,7 @@ namespace Monitor
         private void ActualizarVistas()
         {
             // Backlog
-            DataSet dataSet = Utilidades.Sql.Ejecutar("DECLARE @FechaLocal DATETIME DECLARE @FechaGTM DATETIME DECLARE @FechaInicio DATETIME SET @FechaLocal = (SELECT GETDATE()) SET @FechaGTM = (SELECT DATEADD(hour, 6, @FechaLocal)) SET @FechaInicio = (SELECT CONVERT(char(10), @FechaGTM, 112)) SELECT iLoggerID AS 'LOGGER', SUM(ISNULL(CAST(iCount AS BIGINT), 0)) AS 'PENDIENTES POR ARCHIVAR' FROM nice_storage_center.dbo.vwScBacklog WHERE dtRecordingGMTStartTime BETWEEN @FechaInicio AND @FechaGTM GROUP BY iLoggerID");
+            DataSet dataSet = Sql.Ejecutar("DECLARE @FechaLocal DATETIME DECLARE @FechaGTM DATETIME DECLARE @FechaInicio DATETIME SET @FechaLocal = (SELECT GETDATE()) SET @FechaGTM = (SELECT DATEADD(hour, 6, @FechaLocal)) SET @FechaInicio = (SELECT CONVERT(char(10), @FechaGTM, 112)) SELECT iLoggerID AS 'LOGGER', SUM(ISNULL(CAST(iCount AS BIGINT), 0)) AS 'PENDIENTES POR ARCHIVAR' FROM nice_storage_center.dbo.vwScBacklog WHERE dtRecordingGMTStartTime BETWEEN @FechaInicio AND @FechaGTM GROUP BY iLoggerID");
 
             if (dataSet.Tables.Count > 0)
                 dataGridBacklog.DataSource = dataSet.Tables[0];
