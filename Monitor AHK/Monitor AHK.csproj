@@ -7,7 +7,7 @@
     <ProjectGuid>{2293EC4E-73A4-473B-AE16-6FC86E502E8A}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>MonitorAHK2</RootNamespace>
-    <AssemblyName>MonitorAHK2</AssemblyName>
+    <AssemblyName>Monitor AHK</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -31,6 +31,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup />
   <ItemGroup>
     <Reference Include="MiLibreria">
       <HintPath>..\MiLibreria\bin\Debug\MiLibreria.dll</HintPath>
@@ -69,6 +70,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
