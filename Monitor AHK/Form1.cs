@@ -3,7 +3,7 @@ using System;
 using System.Data;
 using System.Windows.Forms;
 
-namespace MonitorAHK2
+namespace Monitor
 {
     public partial class Form1 : Form
     {

@@ -1,4 +1,4 @@
-﻿namespace MonitorAHK2
+﻿namespace Monitor
 {
     partial class Form1
     {
