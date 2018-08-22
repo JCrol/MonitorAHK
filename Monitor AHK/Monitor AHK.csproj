@@ -6,7 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{2293EC4E-73A4-473B-AE16-6FC86E502E8A}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>MonitorAHK2</RootNamespace>
+    <RootNamespace>Monitor</RootNamespace>
     <AssemblyName>Monitor AHK</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
